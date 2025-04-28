@@ -20,7 +20,7 @@ app.use('/user',userRouter)
 connectDB()
 
 
- //Server starting
+//Server starting
  app.listen(3000,"localhost",()=>{
     console.log("server is running on http://localhost:3000");
     

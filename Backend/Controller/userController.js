@@ -1,21 +1,28 @@
-import userModel from "../Model/userModel,js";
+import userModel from "../Model/userModel.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 //Signup user
 let saltRound=10
  let secretKey="LiaplusAi@123"
 const generateToken = (id) => {
-    let studentId = id.toString()
-    let token = jwt.sign(studentId, secretKey)
+    let userId = id.toString()
+    let token = jwt.sign(userId, secretKey)
     return token
 }
 
 export const userSignup= async(req,res)=>{
     try {
         const user=req.body;
+        let existingEmail=await userModel.findOne({email:user.email})
+         if(existingEmail){
+                return res.status(409).json({ msg: "User already exists" });
+            }
+            else{
+        
         let hashedPassword= await bcrypt.hash(user.password,saltRound) 
         let userUpload=await userModel.insertOne({...user,password:hashedPassword})
-        res.status(200).json({msg:"Data inserted successfull",token:generateToken(userUpload._id)})  
+        res.status(201).json({msg:"Data inserted successfull",token:generateToken(userUpload._id)})  
+            }
     } catch (error) {
         res.status(500).json({message:"Something went wrong",error:error.message})
     }
@@ -40,7 +47,7 @@ export const userSignin=async(req,res)=>{
 
                 }
                 else{
-                    res.status(400).json({msg:"Wrong Password"})
+                    res.status(401).json({msg:"Wrong Password"})
                 }
             }
             else{

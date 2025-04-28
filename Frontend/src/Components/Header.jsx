@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate=useNavigate()
 
   // Function to toggle menu visibility on mobile
   const toggleMenu = () => {
@@ -23,6 +24,8 @@ function Header() {
           <Link to="/expenseslist" className="hover:text-gray-400">Expenses List</Link>
           <Link to="/expensesform" className="hover:text-gray-400">Expenses Form</Link>
           <Link to="/dashboard" className="hover:text-gray-400">Dashboard</Link>
+          <button className='bg-green-400 text-amber-100' onClick={()=>navigate('/signin')}>Signin</button>
+          <button className='bg-green-400 text-amber-100'>Signup</button>
         </div>
 
         {/* Hamburger Menu (visible on mobile) */}
