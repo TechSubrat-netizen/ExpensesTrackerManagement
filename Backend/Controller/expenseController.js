@@ -20,6 +20,18 @@ export const getData=async(req,res)=>{
         res.status(500).json({error:error.message})
     }
 }
+//Get Data by id for editing purpose
+export const getDataById=async(req,res)=>{
+    try {
+        let  {id}=req.params
+        id.trim()
+        let data=await expenseModel.findOne({_id:id})
+        res.status(202).json(data)
+        
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+}
 //Update Data Functionalities
 export const updateData=async(req,res)=>{
     try {

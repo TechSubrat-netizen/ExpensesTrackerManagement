@@ -1,6 +1,8 @@
 import express from 'express'
 import connectDB from './config/db.js';
 import expenseRouter from './Routing/expenseRouter.js';
+import userRouter from './Routing/userRouter.js';
+import cors from 'cors'
  const app=express()
 
 //Midlleware
@@ -10,6 +12,7 @@ app.use(cors())
 
 //Routing
 app.use('/expenses',expenseRouter)
+app.use('/user',userRouter)
 
 
 

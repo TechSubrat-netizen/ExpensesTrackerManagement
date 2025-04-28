@@ -14,11 +14,6 @@ function Header() {
       <div className="flex justify-between items-center">
         {/* Logo Section (left side) */}
         <div className="flex items-center">
-          <img
-            src="your-logo-url.png"
-            alt="Logo"
-            className="w-12 h-12 inline-block mr-2"
-          />
           <span className="text-xl font-bold">Expenses Tracker</span>
         </div>
 
